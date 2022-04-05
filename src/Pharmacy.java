@@ -3,6 +3,23 @@ public class Pharmacy {
    private String address;
    private String phone;
    private Medicine[] listOfMedicines;
+
+   public int getNumOfMedicines() {
+      return numOfMedicines;
+   }
+
+   public int getNumOfPatients() {
+      return numOfPatients;
+   }
+
+   public int getNumOfDoctors() {
+      return numOfDoctors;
+   }
+
+   public int getNumOfPrescriptions() {
+      return numOfPrescriptions;
+   }
+
    private int numOfMedicines;
    private Patient[] listOfPatients;
    private int numOfPatients;
@@ -87,6 +104,10 @@ public Pharmacy() {
    public void addPrescription(Prescription pr){
       listOfPrescriptions[numOfPrescriptions]=pr;
       numOfPrescriptions++;
+      //O giatros deixnei se kathe sintagi pou eftiakse
+      pr.getDoctor().addPrescription(pr);
+      //To idio gia ton astheni
+      pr.getPatient().addPrescription(pr);
    }
 
    public Doctor getDoctorByAm(String am) {

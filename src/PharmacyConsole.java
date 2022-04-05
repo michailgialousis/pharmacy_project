@@ -33,10 +33,12 @@ public class PharmacyConsole {
         //Gia sintagi
         Prescription pr = new Prescription("prescr11111", LocalDate.parse("23/03/2022", dtf), pha.getDoctorByAm("doc11111"), pha.getPatientByAmka("11111111"));
         //Eidikotera gia farmaka kai posotites tous
-        pr.addPrescriptionItem(new PrescriptionItem(pha.getMedicineByCode("med11111"), 2));
+        PrescriptionItem tempPrItem = new PrescriptionItem(pha.getMedicineByCode("med11111"), 2);
+        pr.addPrescriptionItem(tempPrItem);
         pr.addPrescriptionItem(new PrescriptionItem(pha.getMedicineByCode("med22222"), 4));
         pr.addPrescriptionItem(new PrescriptionItem(pha.getMedicineByCode("med33333"), 1));
         pha.addPrescription(pr);
+
 
         pr = new Prescription("prescr22222", LocalDate.parse("24/03/2022", dtf), pha.getDoctorByAm("doc11111"), pha.getPatientByAmka("22222222"));
         pr.addPrescriptionItem(new PrescriptionItem(pha.getMedicineByCode("med11111"), 1));
@@ -110,57 +112,39 @@ public class PharmacyConsole {
                     patLname = reader.readString("Give me patient last name:");
                     patId = reader.readString("Give me patient id:");
                     pha.addPatient(new Patient(patFname, patLname, patId));
+                case 4:
+
+
                 case 8:
                     print(pha);
 
-
             }
-
-
         }
 
 
     }
 
-    private static void print(Pharmacy pha) {
-        System.out.println("Doctors: ");
-        for (Doctor doc : pha.getListOfDoctors()) {
-            if (doc == null) {
-                break;
-            }
-            System.out.println("A.M. " + doc.getAm() + ", Name: " + doc.getLastName() + " " + doc.getFirstName());
-            System.out.println("Prescriptions");
-            if (doc.getPrescriptions() != null) {
-                for (Prescription pres : doc.getPrescriptions()) {
-                    System.out.println("Code: " + pres.getCode() + "Date: " + pres.getDate() + "Patient: " + pres.getPatient());
-                }
-            }
+    private static void print(Pharmacy pharmacy){
+        System.out.println("Medicines:");
+        for(int i=0;i< pharmacy.getNumOfMedicines();i++){
+            pharmacy.getListOfMedicines()[i].print();
         }
-        System.out.println("====================================================");
-        System.out.println("Medicines: ");
-        for (Medicine med : pha.getListOfMedicines()) {
-            if (med == null) {
-                break;
-            }
-            System.out.println("Code: " + med.getCode() + ", Price: " + med.getPrice() + ", Name: " + med.getName());
+        System.out.println("Patients:");
+        for(int i=0;i<pharmacy.getNumOfPatients();i++){
+            pharmacy.getListOfPatients()[i].print();
         }
-        System.out.println("====================================================");
-        System.out.println("Prescriptions");
-        for (Prescription pre : pha.getListOfPrescriptions()) {
-            if (pre == null)
-                break;
-            System.out.println("Code: " + pre.getCode() + "Patient Amka " + pre.getPatient().getAmka() + "Patient Name " +
-                    pre.getPatient().getLastName() + " " + pre.getPatient().getFirstName() + ", Date: " +
-                    pre.getDate() + "Doctor Name: " + pre.getDoctor().getLastName());
-            System.out.println("        Prescription Items: ");
-            for (PrescriptionItem preItem: pre.getPrescriptionItems()) {
-                if (preItem == null)
-                    break;
-                System.out.println("         Medicine Name: " + preItem.getMedicine().getName() + ", Quantity: " + preItem.getAmount());
-            }
+        System.out.println("Doctors:");
+        for(int i=0;i<pharmacy.getNumOfDoctors();i++){
+            pharmacy.getListOfDoctors()[i].print();
+        }
+        System.out.println("Prescriptions:");
+        for(int i=0;i<pharmacy.getNumOfPrescriptions();i++){
+            pharmacy.getListOfPrescriptions()[i].print();
         }
 
     }
+
+
 
     public static void printMenu() {
         System.out.println("                 Welcome to the Drug Lord");

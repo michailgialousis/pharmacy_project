@@ -49,4 +49,10 @@ public class Prescription {
         numOfPrescriptionItems++;
     }
 
+    public void print() {
+        System.out.println("Prescription's Code: "+code+", Date: "+ date+", DoctorId: "+ doctor.getAm()+", PatientId: "+ patient.getAmka()  );
+        for(int i=0 ; i<numOfPrescriptionItems;i++){
+            prescriptionItems[i].print();
+        }
+    }
 }

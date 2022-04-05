@@ -27,4 +27,8 @@ public class PrescriptionItem {
   public int getPrescriptionPrice() {
         return getAmount() * medicine.getPrice();
     }
+
+    public void print() {
+        System.out.println("Medicine Name: " + medicine.getName() + ", Amount: " + amount);
+    }
 }

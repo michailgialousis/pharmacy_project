@@ -3,13 +3,15 @@ public class Patient {
     private String lastName;
     private String amka;
     private Prescription[] prescriptions;
+    private int numOfPrescriptions;
 
     public Patient(String fn,String ln,String amka){
 
         this.firstName=fn;
         this.lastName=ln;
         this.amka=amka;
-        this.prescriptions=prescriptions;
+        this.numOfPrescriptions=0;
+        this.prescriptions = new Prescription[50];
     }
 
     public String getFirstName() {
@@ -42,5 +44,18 @@ public class Patient {
 
     public void setPrescriptions(Prescription[] prescriptions) {
         this.prescriptions = prescriptions;
+    }
+
+    public void addPrescription(Prescription prescription){
+        prescriptions[numOfPrescriptions]=prescription;
+        numOfPrescriptions++;
+    }
+
+    public void print(){
+        System.out.println("Patient's Firstname: "+ firstName+", Lastname: "+ lastName+", Id: "+ amka);
+
+        for(int i=0;i<numOfPrescriptions;i++){
+            prescriptions[i].print();
+        }
     }
 }

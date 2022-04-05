@@ -5,10 +5,10 @@ public class Medicine {
     private int price;
 
 
-    public Medicine(String code,String name,int price){
-        this.code=code;
-        this.name=name;
-        this.price=price;
+    public Medicine(String code, String name, int price) {
+        this.code = code;
+        this.name = name;
+        this.price = price;
 
     }
 
@@ -34,5 +34,9 @@ public class Medicine {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public void print() {
+        System.out.println("Medicine Code: " + code + ", Name: " + name + ", Price: " + price);
     }
 }
